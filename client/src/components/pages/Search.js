@@ -13,7 +13,8 @@ class Search extends React.Component {
         });
     };
 
-    handleSubmit = () => {
+    handleSubmit = (event) => {
+        event.preventDefault();
         console.log(this.state.searched);
         API.googleSearch(this.state.searched).then((response) => {
             console.log(response);

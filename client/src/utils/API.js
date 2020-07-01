@@ -14,6 +14,6 @@ export default {
     },
     // google search
     googleSearch: function(searchTerm) {
-        return axios.get("/api/books" + searchTerm);
+        return axios.get("/api/books/" + searchTerm);
     }
 }

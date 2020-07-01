@@ -1,4 +1,5 @@
 import React from "react";
+import API from "../utils/API";
 
 class BookRecord extends React.Component {
     handleSaveBook = (event) => {
@@ -6,6 +7,9 @@ class BookRecord extends React.Component {
         const { _id, title, authors, description, image, link } = this.props;
         console.log( {_id, title, authors, description, image, link} );
         // change the state to saved? add it do db? 
+
+        API.saveBook({ _id, title, authors, description, image, link });
+
     }
 
     render() {

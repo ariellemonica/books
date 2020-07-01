@@ -1,9 +1,11 @@
 import React from "react";
+import BookRecord from "../BookRecord";
 import API from "../../utils/API";
 
 class Search extends React.Component {
     state = {
-        searched: ""
+        searched: "",
+        books: []
     }
 
     handleInputChange = event => {
@@ -17,7 +19,10 @@ class Search extends React.Component {
         event.preventDefault();
         console.log(this.state.searched);
         API.googleSearch(this.state.searched).then((response) => {
-            console.log(response);
+            console.log(response.data);
+            this.setState({
+                books: response.data
+            })
         })
     }
 
@@ -32,6 +37,20 @@ class Search extends React.Component {
                     </div>
                     <button onClick={this.handleSubmit} type="submit" className="btn btn-primary">Submit</button>
                 </form>
+                <div className="row">
+                    {this.state.books.map(bookItem => (
+                        <BookRecord
+                            key={bookItem.id}
+                            _id={bookItem.id}
+                            title={bookItem.volumeInfo.title}
+                            authors={bookItem.volumeInfo.authors}
+                            description={bookItem.volumeInfo.description}
+                            image={bookItem.volumeInfo.imageLinks.thumbnail}
+                            link={bookItem.volumeInfo.infoLink}
+                        />
+                    ))}
+                </div>
+
             </div>
         )
     }

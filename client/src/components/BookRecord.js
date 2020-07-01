@@ -12,6 +12,15 @@ class BookRecord extends React.Component {
 
     }
 
+
+    handleDeleteBook = (event) => {
+        const { _id, title, authors, description, image, link } = this.props;
+        console.log({ _id, title, authors, description, image, link });
+        // change the state to saved? add it do db? 
+
+        API.deleteBook({ _id, title, authors, description, image, link });
+    }
+
     render() {
         return (
             <div className="card col-3">
@@ -21,6 +30,7 @@ class BookRecord extends React.Component {
                 <p className="card-text">{this.props.description}</p>
                 <a className="btn btn-primary" href={this.props.link} target="_blank">Details</a>
                 <button onClick={this.handleSaveBook} type="button" className="btn btn-success">Save Book</button>
+                <button onClick={this.handleDeleteBook} type="button" className="btn btn-danger">Delete Book</button>
             </div>
         )
     }
